@@ -9,6 +9,11 @@ class Article extends Model
 {
     protected $fillable = ['title', 'slug', 'body', 'subject_id'];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';   
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

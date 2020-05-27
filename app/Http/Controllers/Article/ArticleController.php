@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ArticleResource;
+use App\Models\Article\Article;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -47,9 +49,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        //
+        return new ArticleResource($article);
     }
 
     /**
