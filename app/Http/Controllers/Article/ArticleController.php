@@ -38,12 +38,7 @@ class ArticleController extends Controller
             'subject' => ['required'],
         ]);
 
-        $articles = auth()->user()->articles()->create([
-            'title' => request('title'),
-            'slug' => \Str::slug(request('title')) ,
-            'body' => request('body'),
-            'subject_id' => request('subject'),
-        ]);
+        $articles = auth()->user()->articles()->create($this->articleStore());
 
         return $articles;
     }
@@ -66,9 +61,10 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        $article->update($this->articleStore());
+        return new ArticleResource($article);
     }
 
     /**
@@ -80,5 +76,15 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function articleStore()
+    {
+        return [
+            'title' => request('title'),
+            'slug' => \Str::slug(request('title')) ,
+            'body' => request('body'),
+            'subject_id' => request('subject'),
+        ];
     }
 }
