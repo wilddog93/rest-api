@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Article;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ArticleCollection;
 use App\Http\Resources\ArticleResource;
 use App\Models\Article\Article;
 use Illuminate\Http\Request;
@@ -16,7 +17,11 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::get();
+        return ArticleResource::collection($articles);
+        //jika tidak ingin menggunakan ArticleCollection maka gunakan method ini
+        // return new ArticleCollection($articles);
+        //jika anda ingin menampilakn data dengan response maka lebih baik menggunakan ArticleCollection ini, jika tidak perlu ArticleResource sdh cukup
     }
 
     /**

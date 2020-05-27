@@ -18,7 +18,8 @@ class ArticleResource extends JsonResource
         // method ini untuk menampilkan data secara keseluruhan, sedangkan method yg di bawah berikut ini hanya menampilkan data sesuai yang kita inginkan.
         return [
             'title' => $this->title,
-            'article' =>$this->body,
+            'slug' =>$this->slug,
+            'body' =>$this->body,
             'subject' => $this->subject->name,
             'published' => $this->created_at->format('d F Y'),
             'author' => $this->user->name,
